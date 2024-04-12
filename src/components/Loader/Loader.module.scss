@@ -1,0 +1,17 @@
+.loader {
+  height: 50px;
+  width: 50px;
+  background: black;
+  animation: changeLoader 0.7s ease-in-out infinite;
+
+  @keyframes changeLoader {
+    0% {
+      background: blue;
+      transform: rotate(0deg);
+    }
+    100% {
+      background: red;
+      transform: rotate(360deg);
+    }
+  }
+}
