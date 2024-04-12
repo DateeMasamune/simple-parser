@@ -20,29 +20,31 @@ function App() {
   const [loadState, setLoadState] = useState(EFetchState.initial);
 
   const setListData = useCallback(
-    (texts, emerge: number, setList, sourceRef: string) => {
+    (texts, emerge: number, setList, sourceRef: string | null, keyWords: string[]) => {
       for (const text of texts) {
         const isCoincidences = keyWords.some((word) =>
           text.textContent.toLowerCase().trim().includes(word)
         );
 
         if (isCoincidences) {
-          let target = text;
+          let parent = text;
+
           for (let i = 0; i <= emerge; i++) {
-            target = target.parentNode;
+            parent = parent.parentNode;
           }
+          
           setList((prevState) => [
-            ...prevState.filter(({ id }) => id !== target?.id),
+            ...prevState.filter(({ message }) => message !== text.textContent),
             {
-              id: target?.id,
-              ref: `${sourceRef}#${target?.id}`,
+              id: parent?.id || text.textContent,
+              ref: `${sourceRef}#${parent?.id}`,
               message: text.textContent,
             },
           ]);
         }
       }
     },
-    [keyWords]
+    []
   );
 
   const buildNextUrl = useCallback((sourceRef: string, query: string) => {
@@ -67,15 +69,17 @@ function App() {
       setLoadState(EFetchState.pending);
 
       const data = await fetch(source || "");
-      const result = await data.text();
-      const root = parse(result);
+      const result = await data.arrayBuffer();
+      const byteArray = new Uint8Array(result);
+      const decodedText = new TextDecoder("windows-1251").decode(byteArray);
+      const root = parse(decodedText);
       const texts = root.querySelectorAll(selectorName);
 
       if (!texts.length) {
         return;
       }
 
-      setListData(texts, emerge, setList, sourceRef);
+      setListData(texts, emerge, setList, source, keyWords);
       setLoadState(EFetchState.fulfilled);
 
       if (query) {
@@ -83,6 +87,7 @@ function App() {
         await fetchData(nextUrl);
       }
     } catch (err) {
+      console.error(err);
       setLoadState(EFetchState.rejected);
     }
   };
