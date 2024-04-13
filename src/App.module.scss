@@ -2,10 +2,9 @@
   padding: 20px 100px;
   max-width: 800px;
   margin: 0 auto;
-
-  .sourceInput {
-    width: 100%;
-  }
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
 
   .loaderContainer {
     display: flex;
@@ -14,8 +13,8 @@
   }
 
   .stopButton {
-      top: 50%;
-      right: 100px;
-      position: fixed;
+    top: 50%;
+    right: 100px;
+    position: fixed;
   }
 }
