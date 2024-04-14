@@ -1,9 +1,9 @@
 export const fetchUrl = async (sourceRef: string) => {
   const data = await fetch(sourceRef || "");
 
-  const [, charset] = data.headers.get("Content-Type")?.split(";") || [];
-  const indexCharset = charset?.indexOf("=");
-  const currentCharset = charset
+  const [, contentType] = data.headers.get("Content-Type")?.split(";") || [];
+  const indexCharset = contentType?.indexOf("=");
+  const currentCharset = contentType
     ?.slice(indexCharset + 1)
     ?.trim()
     .toLocaleLowerCase();
