@@ -76,7 +76,7 @@ export const useParser = () => {
         }
       }
     },
-    []
+    [isSearchId]
   );
 
   const buildNextUrl = useCallback((sourceRef: string, query: string) => {
