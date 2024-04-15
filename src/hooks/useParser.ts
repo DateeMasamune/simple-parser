@@ -112,7 +112,9 @@ export const useParser = () => {
       const texts = root.querySelectorAll(selectorName);
 
       if (!texts.length) {
-        return;
+        throw Error(
+          "Элементы не найдены, возможно не соотвествует имя селектора для поиска"
+        );
       }
 
       setListData(texts, emerge, setList, sourceRef, keyWords);
