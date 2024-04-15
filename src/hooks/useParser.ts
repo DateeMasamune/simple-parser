@@ -9,11 +9,11 @@ import { fetchUrl } from "../api/fetchUrl";
 export const useParser = () => {
   const page = useRef(1);
   const stop = useRef(false);
-  const [showSnackbar, setShowSnackbar] = useState(false);
   const [list, setList] = useState<IList[]>([]);
-  const [loadState, setLoadState] = useState(EFetchState.initial);
   const [isSearchId, setIsSearchId] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const [loadState, setLoadState] = useState(EFetchState.initial);
 
   const unregisterFieldSearchId = (isChecked: boolean) => {
     setIsSearchId(isChecked);
