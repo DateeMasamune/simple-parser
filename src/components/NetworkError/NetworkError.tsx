@@ -2,7 +2,7 @@ import { FC } from "react";
 import Alert from "@mui/material/Alert/Alert";
 
 interface IProp {
-  message?: string;
+  message?: string | null;
 }
 
 export const NetworkError: FC<IProp> = ({

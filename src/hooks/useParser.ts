@@ -11,7 +11,7 @@ export const useParser = () => {
   const stop = useRef(false);
   const [list, setList] = useState<IList[]>([]);
   const [isSearchId, setIsSearchId] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [loadState, setLoadState] = useState(EFetchState.initial);
 
