@@ -1,9 +1,16 @@
-import styles from "./NetworkError.module.scss";
+import { FC } from "react";
+import Alert from "@mui/material/Alert/Alert";
 
-export const NetworkError = () => {
+interface IProp {
+  message?: string;
+}
+
+export const NetworkError: FC<IProp> = ({
+  message = "Что-то пошло не так...",
+}) => {
   return (
-    <div className={styles.container}>
-      <h1>Что-то пошло не так...</h1>
-    </div>
+    <Alert severity="error">
+      <h1>{message}</h1>
+    </Alert>
   );
 };

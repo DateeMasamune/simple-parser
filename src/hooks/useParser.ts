@@ -13,6 +13,7 @@ export const useParser = () => {
   const [list, setList] = useState<IList[]>([]);
   const [loadState, setLoadState] = useState(EFetchState.initial);
   const [isSearchId, setIsSearchId] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const unregisterFieldSearchId = (isChecked: boolean) => {
     setIsSearchId(isChecked);
@@ -106,7 +107,7 @@ export const useParser = () => {
 
       setLoadState(EFetchState.pending);
       const decodedText = await fetchUrl(sourceRef);
-      
+
       const root = parse(decodedText);
       const texts = root.querySelectorAll(selectorName);
 
@@ -123,6 +124,7 @@ export const useParser = () => {
       }
     } catch (err) {
       console.error(err);
+      setErrorMessage(err?.message);
       setLoadState(EFetchState.rejected);
     }
   };
@@ -134,6 +136,7 @@ export const useParser = () => {
     register,
     onSubmit,
     loadState,
+    errorMessage,
     showSnackbar,
     handleSubmit,
     handleCloseSnackbar,

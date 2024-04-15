@@ -22,6 +22,7 @@ function App() {
     onSubmit,
     loadState,
     handleSubmit,
+    errorMessage,
     showSnackbar,
     handleCloseSnackbar,
     unregisterFieldSearchId,
@@ -130,7 +131,7 @@ function App() {
       >
         Остановить
       </Button>
-      {loadState === EFetchState.rejected && <NetworkError />}
+      {loadState === EFetchState.rejected && <NetworkError message={errorMessage} />}
     </form>
   );
 }
